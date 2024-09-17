@@ -1,4 +1,6 @@
 import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Dashbord from "./pages/Dashboard";
 import Booking from "./pages/Bookings";
@@ -11,9 +13,20 @@ import PageNotFound from "./pages/PageNotFound";
 import GlobalStyle from "./styles/GlobalStyle";
 import AppLayout from "./ui/AppLayout";
 
+const quaryClint = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queries: {
+        staleTime: 0,
+      },
+    },
+  },
+});
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={quaryClint}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
@@ -30,7 +43,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </QueryClientProvider>
   );
 }
 
