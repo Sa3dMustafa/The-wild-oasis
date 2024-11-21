@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import GlobalStyle from "./styles/GlobalStyle";
 import AppLayout from "./ui/AppLayout";
+import { Toaster } from "react-hot-toast";
 
 const quaryClint = new QueryClient({
   defaultOptions: {
@@ -43,6 +44,24 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+      <Toaster position="top-center" 
+      gutter={12}
+      containerStyle={{top: 30}}
+      toastOptions={{
+        success: {
+          duration: 3000,
+        },
+        error: {
+          duration: 4000,
+        },
+        style: {
+          backgroundColor: "var(--color-gray-0)",
+          color: "var(--color-gray-700)",
+          fontSize:"16px",
+          maxWidth:"400px",
+          padding:"15px 22px",
+        },
+      }}/>
     </QueryClientProvider>
   );
 }
